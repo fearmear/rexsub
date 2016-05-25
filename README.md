@@ -1,2 +1,2 @@
 # rexsub
-Automagically **r**enames **ex**ternal **su**btitles by matching subtitle vs video filename.
+Automagically **r**enames **ex**ternal **sub**titles by matching subtitle vs video filename.
