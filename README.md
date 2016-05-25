@@ -1,2 +1,2 @@
-# exsubr
-Automagically renames external subtitles by matching subtitle vs video filename
+# rexsub
+Automagically **r**enames **ex**ternal **su**btitles by matching subtitle vs video filename.
