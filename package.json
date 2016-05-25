@@ -1,0 +1,24 @@
+{
+  "name": "rexsub",
+  "version": "0.0.1",
+  "description": "Automagically renames external subtitles by matching subtitle vs video filename.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fearmear/rexsub.git"
+  },
+  "keywords": [
+    "rename",
+    "external",
+    "subtitles"
+  ],
+  "author": "Dmitry K. <fearmear@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fearmear/rexsub/issues"
+  },
+  "homepage": "https://github.com/fearmear/rexsub#readme"
+}
