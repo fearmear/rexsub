@@ -1,0 +1,8 @@
+{
+  "movies": [
+    "mkv", "mp4", "avi", "mpg", "mpeg"
+  ],
+  "subtitles": [
+    "srt", "ass", "ssa"
+  ]
+}

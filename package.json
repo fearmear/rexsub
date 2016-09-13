@@ -20,5 +20,10 @@
   "bugs": {
     "url": "https://github.com/fearmear/rexsub/issues"
   },
-  "homepage": "https://github.com/fearmear/rexsub#readme"
+  "homepage": "https://github.com/fearmear/rexsub#readme",
+  "dependencies": {
+    "fuzzy-matching": "^0.4.3",
+    "glob": "^7.0.6",
+    "yargs": "^5.0.0"
+  }
 }
