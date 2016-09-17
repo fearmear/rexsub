@@ -1,10 +1,11 @@
 {
   "name": "rexsub",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "Automagically renames external subtitles by matching subtitle vs video filename.",
-  "main": "index.js",
+  "main": "./src/index.js",
+  "bin": "./bin/rexsub.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./src/index.js ./test --dry-run"
   },
   "repository": {
     "type": "git",
@@ -22,8 +23,8 @@
   },
   "homepage": "https://github.com/fearmear/rexsub#readme",
   "dependencies": {
-    "fuzzy-matching": "^0.4.3",
     "glob": "^7.0.6",
+    "similar": "^0.1.0",
     "yargs": "^5.0.0"
   }
 }
