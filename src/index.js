@@ -17,7 +17,7 @@ var spaceLikeCharsRE =  /[_-]/g;
 var whiteSpaceRE = /[\s\.]+/g;
 
 if (!directory) {
-    return console.error('No directory specified');
+    return console.error('No directory specified.');
 }
 
 function getSimplifiedFileName(filePath){
@@ -50,10 +50,12 @@ function collectRenameCommands(){
           });
           if (similarMovies && similarMovies[0] && similarMovies[0].similarity > 0) {
               var newPath = similarMovies[0].moviePath.replace(fileExtensionRE, subtitlePath.match(fileExtensionRE)[0]);
-              renameCmds[subtitlePath] = newPath;
-              console.log(`${getFileName(subtitlePath)} > ${getFileName(newPath)}`);
-          } else {
-            console.log(`No similar video file name found for ${getFileName(subtitlePath)}`);
+              if (newPath !== subtitlePath) {
+                renameCmds[subtitlePath] = newPath;
+                console.info(`${getFileName(subtitlePath)} > ${getFileName(newPath)}`);
+              }
+          } else if (argv.verbose) {
+             console.info(`No similar video file name found for ${getFileName(subtitlePath)}`);
           }
       });
       deferred.resolve(renameCmds);
@@ -62,12 +64,15 @@ function collectRenameCommands(){
   return deferred.promise;
 }
 
-collectRenameCommands().then(function(commands){
-  if (!argv.dryRun) {
+collectRenameCommands().then(function(renameCmds){
+  var filesToRename = Object.keys(renameCmds).length;
+  if (filesToRename === 0) {
+    console.info('Found no files to rename.');
+  } else if (!argv.dryRun) {
     prompt('Type "y" or "yes" to apply the changes: ', function(answer){
       if (answer.match(/^y(es)?$/i)) {
-        for (var key in commands) {
-          fs.renameSync(key, commands[key]);
+        for (var key in renameCmds) {
+          fs.rename(key, renameCmds[key]);
         }
       }
     });
