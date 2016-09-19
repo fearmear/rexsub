@@ -18,12 +18,16 @@ if (!directory) {
     throw new Error('No directory specified');
 }
 
-function getSimplifiedFileName(str){
-  return simplifyFileName(str.replace(filePathRE, ''));
+function getSimplifiedFileName(filePath){
+  return simplifyFileName(getFileName(filePath));
 }
 
-function simplifyFileName(str){
-  return str.replace(fileExtensionRE, '').replace(specialCharsRE, '').replace(spaceLikeCharsRE, ' ').replace(whiteSpaceRE, ' ').trim().toLowerCase()
+function getFileName(filePath){
+  return filePath.replace(filePathRE, '');
+}
+
+function simplifyFileName(fileName){
+  return fileName.replace(fileExtensionRE, '').replace(specialCharsRE, '').replace(spaceLikeCharsRE, ' ').replace(whiteSpaceRE, ' ').trim().toLowerCase();
 }
 
 glob(`${directory}/*.*(${extensions.movies.join('|')})`, function (er, movies) {
@@ -44,9 +48,9 @@ glob(`${directory}/*.*(${extensions.movies.join('|')})`, function (er, movies) {
                 if (!argv.dryRun) {
                     fs.renameSync(subtitlePath, newPath);
                 }
-                console.log(`${subtitlePath} > ${newPath}`);
+                console.log(`${getFileName(subtitlePath)} > ${getFileName(newPath)}`);
             } else {
-              console.log(`No similar file names found for ${subtitlePath}`);
+              console.log(`No similar video file name found for ${getFileName(subtitlePath)}`);
             }
         });
     });
