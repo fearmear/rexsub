@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-if [[ $(./src/index.js ./test/files --dry-run) == "\
+if [[ $(./src/index.js ./test/files --dry-run --verbose) == "\
 HorribleSubs_Mayoiga_-_01.ass > [Leopard-Raws] Mayoiga - 01 RAW (WOWOW 1280x720 x264 AAC).ass
 No similar video file name found for HorribleSubs_Mayoiga_-_02.ass
 HorribleSubs_Mayoiga_-_03.ass > [Leopard-Raws] Mayoiga - 03 RAW (WOWOW 1280x720 x264 AAC).ass
