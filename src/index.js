@@ -17,7 +17,7 @@ var spaceLikeCharsRE =  /[_-]/g;
 var whiteSpaceRE = /[\s\.]+/g;
 
 if (!directory) {
-    console.error('No directory specified');
+    return console.error('No directory specified');
 }
 
 function getSimplifiedFileName(filePath){
