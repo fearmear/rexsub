@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "bin": "./bin/rexsub.js",
   "scripts": {
-    "test": "./src/index.js ./test --dry-run"
+    "test": "bash -c ./test/run.sh"
   },
   "repository": {
     "type": "git",
