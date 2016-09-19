@@ -1,6 +1,6 @@
 {
   "name": "rexsub",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "Automagically renames external subtitles by matching subtitle vs video filename.",
   "main": "./src/index.js",
   "bin": "./bin/rexsub.js",
