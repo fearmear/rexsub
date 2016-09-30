@@ -7,7 +7,7 @@ var path = require('path');
 var q = require('q');
 var prompt = require('cli-prompt');
 
-var extensions = require('./extensions.json');
+var extensions = require('../conf/extensions.json');
 var directory = argv._[0];
 var fileExtensionRE = /\.\w+$/;
 

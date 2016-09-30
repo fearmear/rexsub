@@ -5,7 +5,8 @@
   "main": "./src/index.js",
   "bin": "./bin/rexsub.js",
   "scripts": {
-    "test": "bash -c ./test/run.sh"
+    "test": "bash -c ./test/run.sh",
+    "lint": "eslint ./src/"
   },
   "repository": {
     "type": "git",
@@ -27,5 +28,8 @@
     "glob": "^7.0.6",
     "q": "^1.4.1",
     "yargs": "^5.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.6.1"
   }
 }
