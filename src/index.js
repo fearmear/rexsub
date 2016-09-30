@@ -10,29 +10,12 @@ var prompt = require('cli-prompt');
 var extensions = require('./extensions.json');
 var directory = argv._[0];
 var fileExtensionRE = /\.\w+$/;
-var filePathRE = /\/.*\//;
-var specialCharsRE = /[!@#\$%\^\&\*\)\(\\[\]+=]+/g;
-var spaceLikeCharsRE =  /[_-]/g;
-var whiteSpaceRE = /[\s\.]+/g;
-var seasonEpisodeRE = /s(\d+)(\s+)?e(\d+)/g;
-var leadingZeroesRE = /0+(\d+)/g;
+
+var findSimilarPath = require('./findSimilarPath');
+var filePathToFileName = require('./filePathToFileName');
 
 if (!directory) {
     return console.error('No directory specified.');
-}
-
-function getSimplifiedFileName(filePath){
-    return simplifyFileName(getFileName(filePath));
-}
-
-function getFileName(filePath){
-    return filePath.replace(filePathRE, '');
-}
-
-function simplifyFileName(fileName){
-    return fileName.replace(fileExtensionRE, '').replace(specialCharsRE, '').replace(spaceLikeCharsRE, ' ')
-        .replace(whiteSpaceRE, ' ').replace(seasonEpisodeRE, '$1 $3').replace(leadingZeroesRE, '$1')
-        .trim().toLowerCase();
 }
 
 function collectRenameCommands(){
@@ -42,31 +25,15 @@ function collectRenameCommands(){
             var renameCmds = {};
             subtitles.forEach(function(subtitlePath){
                 subtitlePath = path.resolve(subtitlePath);
-                var similarMovies = movies.map(function(moviePath){
-                    moviePath = path.resolve(moviePath);
-                    var movieName = getSimplifiedFileName(moviePath);
-                    var subtitleName = getSimplifiedFileName(subtitlePath);
-                    movieName.split(' ').forEach(function(part){
-                        part.replace();
-                    });
-                    var diff = movieName.replace(new RegExp(subtitleName.split(' ').join('|'), 'g'), '').trim();
-                    var diff2 = subtitleName.replace(new RegExp(movieName.split(' ').join('|'), 'g'), '').trim();
-                    var similarity = movieName.length - diff.length + subtitleName.length - diff2.length;
-                    return {
-                        similarity: similarity,
-                        moviePath: moviePath
-                    }
-                }).sort(function(a, b){
-                    return a.similarity > b.similarity ? -1 : 1;
-                });
-                if (similarMovies && similarMovies[0] && similarMovies[0].similarity > 0) {
-                    var newPath = similarMovies[0].moviePath.replace(fileExtensionRE, subtitlePath.match(fileExtensionRE)[0]);
+                var similarPath = findSimilarPath(movies, subtitlePath);
+                if (similarPath) {
+                    var newPath = similarPath.replace(fileExtensionRE, subtitlePath.match(fileExtensionRE)[0]);
                     if (newPath !== subtitlePath) {
                         renameCmds[subtitlePath] = newPath;
-                        console.info(`${getFileName(subtitlePath)} > ${getFileName(newPath)}`);
+                        console.info(`${filePathToFileName(subtitlePath)} > ${filePathToFileName(newPath)}`);
                     }
                 } else if (argv.verbose) {
-                    console.info(`No similar video file name found for ${getFileName(subtitlePath)}`);
+                    console.info(`No similar video file name found for ${filePathToFileName(subtitlePath)}`);
                 }
             });
             deferred.resolve(renameCmds);
