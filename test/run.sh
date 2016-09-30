@@ -13,7 +13,7 @@ HorribleSubs_Mayoiga_-_10.ass > [Leopard-Raws] Mayoiga - 10 RAW (WOWOW 1280x720 
     then ((failed_test_count++));
 fi
 
-if [[ $(./src/index.js ./test/nacros 2 --dry-run --verbose) != "\
+if [[ $(./src/index.js ./test/narcos\ 2 --dry-run --verbose) != "\
 narcos.s02e01.720p.webrip.x264-skgtv.srt > Narcos 2 - 01.srt
 narcos.s02e02.720p.webrip.x264-skgtv.srt > Narcos 2 - 02.srt
 narcos.s02e10.720p.webrip.x264-skgtv.srt > Narcos 2 - 10.srt" ]];
