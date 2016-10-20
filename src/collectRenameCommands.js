@@ -2,6 +2,7 @@ var glob = require("glob");
 var fs = require('fs');
 var path = require('path');
 var q = require('q');
+var argv = require('yargs').argv;
 
 var findSimilarPath = require('./findSimilarPath');
 var filePathToFileName = require('./filePathToFileName');

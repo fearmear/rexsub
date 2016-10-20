@@ -2,6 +2,7 @@
 
 var argv = require('yargs').argv;
 var prompt = require('cli-prompt');
+var fs = require('fs');
 
 var directory = argv._[0];
 
